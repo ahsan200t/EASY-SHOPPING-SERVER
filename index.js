@@ -40,9 +40,16 @@ async function run() {
         const productCollection = client.db('productsDb').collection('products');
 
         app.get('/products', async (req, res) => {
+            const filter = req.query;
+            const query ={};
+            const options = {
+                sort: {
+                    Price: filter.sort === 'asc' ? 1 : -1
+                }
+            }
             const page = parseInt(req.query.page);
             const size = parseInt(req.query.size)
-            const result = await productCollection.find()
+            const result = await productCollection.find(query,options)
             .skip(page * size)
             .limit(size)
             .toArray();
