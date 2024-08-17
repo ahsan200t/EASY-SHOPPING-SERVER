@@ -1,7 +1,7 @@
-# BloodBridge
+# EASY-SHOPPING
 
-## Server Repo Link:
-https://github.com/ahsan200t/Blood-Donation-A12-Server
+## Client Side Repo Link:
+https://github.com/ahsan200t/EASY-SHOPPING
 
 ## Live Link:
 https://assignment-12-client-90a98.web.app
