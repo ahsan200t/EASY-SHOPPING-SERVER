@@ -7,9 +7,11 @@ const port = process.env.PORT || 5000;
 
 const corsOptions = {
     origin: [
-      'http://localhost:5173',
-      'http://localhost:5000',
-      'http://localhost:5174',
+    //   'http://localhost:5173',
+    //   'http://localhost:5000',
+    //   'http://localhost:5174',
+      'https://easy-shopping-e6c9d.web.app',
+      'https://easy-shopping-e6c9d.firebaseapp.com/'
       
   
     ],
@@ -41,7 +43,9 @@ async function run() {
 
         app.get('/products', async (req, res) => {
             const filter = req.query;
-            const query ={};
+            const query ={
+                ProductName: {$regex: filter.search, $options: 'i'}
+            };
             const options = {
                 sort: {
                     Price: filter.sort === 'asc' ? 1 : -1
@@ -53,6 +57,11 @@ async function run() {
             .skip(page * size)
             .limit(size)
             .toArray();
+            res.send(result)
+          })
+
+          app.get('/all-products', async(req,res)=>{
+            const result = await productCollection.find().toArray();
             res.send(result)
           })
 
